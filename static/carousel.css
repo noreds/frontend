@@ -1,8 +1,31 @@
-.carousel-inner,.carousel,.item,.container,.fill {
-  height:100%;
-  width:100%;
-  background-position:center center;
-  background-size:cover;
+.carousel-control, .carousel-control.right {
+    background-image: none !important;
+    filter: none !important;
 }
-.slide-wrapper{display:inline;}
-.slide-wrapper .container{padding:0px;}
+
+@font-face {
+    font-family: Vollkorn;
+    src: url("../fonts/vollkorn-regular-webfont.eot");
+    src: local("Vollkorn"),
+    url("../fonts/vollkorn-regular-webfont.woff") format("woff"),
+    url("../fonts/Vollkorn-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Vollkorn;
+    font-weight: bold;
+    src: url("../fonts/vollkorn-bold-webfont.eot");
+    src: local("Vollkorn Bold"),
+    local("Vollkorn"),
+    url("../fonts/vollkorn-bold-webfont.woff") format("woff"),
+    url("../fonts/Vollkorn-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded- opentype'),
+    url('../fonts/glyphicons-halflings-regular.woff') format('woff'),
+    url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+    url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}

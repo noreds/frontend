@@ -1,27 +1,59 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}noooowz{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='carousel.css') }}">
+{% endblock %}
+
+{% block title %}nooooooooooz{% endblock %}
 
 {% block content %}
-    <h1>n{% for cluster in clusters %}o{% endfor %}z</h1>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <h1>nooz</h1>
 
-    <p>we have found {{ clusters | length }} clusters!</p>
+            {% for k, v in mapping.items() %}
+                
+                <span class="label label-{{ v }}">{{ k }}</span>
+            {% endfor %}
+
+            <p>we have found {{ clusters | length }} clusters!</p>
+        </div>
+    </div>
+
+
     {% for cluster in clusters %}
         <div class="row">
 
-                <div class="col-lg-6 col-lg-offset-3" style="height: 100%; overflow: scroll;">
-                    <div id="carousel{{ loop.index }}" class="carousel slide" data-interval="false">
-            <div class="carousel-inner">
-                        <!-- Indicators
+            <div class="col-lg-6 col-lg-offset-3" style="height: 100%;">
+
+                <div id="carousel{{ loop.index }}" class="carousel slide" data-interval="false">
+                    {% set outerloop=loop.index %}
+                    <div class="carousel-inner">
+                        <!-- Indicators-->
                         <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                        </ol>-->
+                            <li data-target="#carousel{{ outerloop }}" data-slide-to="0"
+                                class="{% if outerloop == 1 %}active{% endif %}"></li>
+                        </ol>
                         <!-- Wrapper for slides -->
 
                         {% for item in cluster %}
                             <div class="item{% if loop.index == 1 %} active{% endif %}">
-                                {{ item['item']['item']['fullText'] }}
+                                <div class="col-lg-10 col-lg-offset-1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><a
+                                                href="{{ item['item']['item']['link'] }}">{{ item['item']['item']['title'] }}</a>
+                                        </div>
+                                        <div class="panel-body">
+                                            {{ item['item']['item']['fullText'] }}<br>
+                                            {% if item['tones'] %}
+                                                {% for k, v in item['tones'].items() %}
+                                                    <span class="label label-{{ k }}">{{ v }}</span>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -30,12 +62,14 @@
                     {% if cluster | length > 1 %}
 
                         <a class="left carousel-control" href="#carousel{{ loop.index }}" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="glyphicon glyphicon-chevron-left" style="color:black"
+                                  aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
 
                         <a class="right carousel-control" href="#carousel{{ loop.index }}" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="right glyphicon glyphicon-chevron-right" style="color:black"
+                                  aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
 
