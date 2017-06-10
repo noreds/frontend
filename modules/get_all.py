@@ -30,8 +30,8 @@ def cluster_items(all_items):
         for entity in d['item']['metadata']['entities']:
             if entity['type'] != 'XMN-TAG':
                 entity_uri = entity['uri']
-                print(entity['label'])
-                print(entity['score'])
+                #print(entity['label'])
+                #print(entity['score'])
 
                 # tags appear more than once on an item - we count the first one here
                 if not item_tags.get(entity_uri, False):
@@ -56,7 +56,7 @@ def cluster_items(all_items):
 
     all_bin_tags = []
 
-    for item in items.values():
+    for item in list(items.values()):
         # print(item)
         binary_tags = [1 if x in item['tags'] else 0 for x in all_tags_with_items.keys()]
         # print(binary_tags)
@@ -71,16 +71,16 @@ def cluster_items(all_items):
     # book = array((whitened[0],whitened[2]))  # should be the k guess (fixed to 20 because was 2)
 
     centroids, labels = kmeans2(whitened, 200)
-    clustered_items = {}
+    print(labels)
+    clustered = {}
 
     for num in range(len(labels)):
         label = labels[num]
-        if not clustered_items.get(label, False):
-            clustered_items[label] = [item]
+        if not clustered.get(label, False):
+            clustered[label] = [list(items.values())[num]]
         else:
-            clustered_items[label].append(item)
-
-    return clustered_items
+            clustered[label].append(list(items.values())[num])
+    return clustered
 
 items = query_all_items()
 clustered_items = cluster_items(items)
