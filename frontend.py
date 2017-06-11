@@ -22,6 +22,7 @@ tone_mapping = {
 for cluster in list(clustered_items.values()):
     for item in cluster:
         tone_categories = item['item']['item'].get('sentiment', {}).get('document_tone', {}).get('tone_categories', False)
+
         if tone_categories:
             #print(tone_categories)
             for cat in tone_categories:

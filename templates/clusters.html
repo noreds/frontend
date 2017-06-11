@@ -45,10 +45,15 @@
                                                 href="{{ item['item']['item']['link'] }}">{{ item['item']['item']['title'] }}</a>
                                         </div>
                                         <div class="panel-body">
+                                        {% if  item['item']['item']['images'][0] %}
+                                        <img src="{{ item['item']['item']['images'][0]['small'] }}" class="img-responsive"><br>
+                                        {% endif %}
                                             {{ item['item']['item']['fullText'] }}<br>
                                             {% if item['tones'] %}
                                                 {% for k, v in item['tones'].items() %}
-                                                    <span class="label label-{{ k }}">{{ v }}</span>
+                                                    {% if v > 0 %}
+                                                        <span class="label label-{{ k }}">{{ v }}</span>
+                                                    {% endif %}
                                                 {% endfor %}
                                             {% endif %}
                                         </div>
