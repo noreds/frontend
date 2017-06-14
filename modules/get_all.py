@@ -2,9 +2,22 @@ from pymongo import MongoClient
 import json
 
 settings = json.load('settings.json')
-client = MongoClient('mongodb://'+settings['mongo']['url']+':27017/')
+client = MongoClient('mongodb://' + settings['mongo']['url'] + ':27017/')
+
+# if news doesn't exist create news
+try:
+    client['news']
+except IndexError:
+    client['news'].create_database('news')
 
 imported_db = client['news']
+
+# if imported doesn't exist create news
+try:
+    imported_db['imported']
+except IndexError:
+    imported_db['imported'].create_collection('imported')
+    
 imported_collection = imported_db['imported']
 
 imported_news = 'imported'
@@ -30,8 +43,8 @@ def cluster_items(all_items):
         for entity in d['item']['metadata']['entities']:
             if entity['type'] != 'XMN-TAG':
                 entity_uri = entity['uri']
-                #print(entity['label'])
-                #print(entity['score'])
+                # print(entity['label'])
+                # print(entity['score'])
 
                 # tags appear more than once on an item - we count the first one here
                 if not item_tags.get(entity_uri, False):
@@ -81,6 +94,7 @@ def cluster_items(all_items):
         else:
             clustered[label].append(list(items.values())[num])
     return clustered
+
 
 items = query_all_items()
 clustered_items = cluster_items(items)
