@@ -1,8 +1,9 @@
 from pymongo import MongoClient
-import os
 import json
 
-client = MongoClient('mongodb://localhost:27017/')
+settings = json.load('settings.json')
+client = MongoClient('mongodb://'+settings['mongo']['url']+':27017/')
+
 imported_db = client['news']
 imported_collection = imported_db['imported']
 

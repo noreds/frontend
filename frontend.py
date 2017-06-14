@@ -6,8 +6,6 @@ from modules.get_all import clustered_items
 app = Flask(__name__)
 Bootstrap(app)
 
-import json
-
 # [{'score': 0.091796, 'tone_name': 'Anger', 'tone_id': 'anger'}, {'score': 0.052257, 'tone_name': 'Disgust', 'tone_id': 'disgust'}, {'score': 0.147788, 'tone_name': 'Fear', 'tone_id': 'fear'}, {'score': 0.046793, 'tone_name': 'Joy', 'tone_id': 'joy'}, {'score': 0.522373, 'tone_name': 'Sadness', 'tone_id': 'sadness'
 
 tone_mapping = {
