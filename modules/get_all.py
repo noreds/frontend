@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import json
 
-settings = json.load('settings.json')
+settings = json.load(open('settings.json'))
 client = MongoClient('mongodb://' + settings['mongo']['url'] + ':27017/')
 
 # if news doesn't exist create news
@@ -17,7 +17,7 @@ try:
     imported_db['imported']
 except IndexError:
     imported_db['imported'].create_collection('imported')
-    
+
 imported_collection = imported_db['imported']
 
 imported_news = 'imported'
